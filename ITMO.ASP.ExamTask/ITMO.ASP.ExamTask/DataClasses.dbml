@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CheaperTogether" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.Events" Member="Events">
+    <Type Name="Events">
+      <Column Name="EnventId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PeopleQuantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Photo" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="EventDateStart" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EventDateEnd" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Tags" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="FirstNameUser" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="LastNameUser" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Association Name="Events_Users" Member="Users" ThisKey="EnventId" OtherKey="EventID" Type="Users" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="Users">
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="Role" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="EventID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Events_Users" Member="Events" ThisKey="EventID" OtherKey="EnventId" Type="Events" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+</Database>

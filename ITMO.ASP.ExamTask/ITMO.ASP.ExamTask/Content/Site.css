@@ -1,0 +1,106 @@
+﻿/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    min-height:500px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    .jumbotron {
+        margin-top: 20px;
+    }
+
+    .body-content {
+        padding: 0;
+    }
+}
+
+/*Расположение элементов на гриде*/
+.grid {
+    display: grid;
+    grid-template-rows: repeat(20, 5%);
+    grid-template-columns: repeat(20, 5%);
+    grid-gap: 10px;
+}
+
+.gridLabelQuantity {
+    grid-row: 1/1;
+    grid-column: 1/5;
+}
+.gridTextBoxQuantity {
+    grid-row: 2/2;
+    grid-column: 1/5;
+}
+.gridLabelDescription {
+    grid-row: 3/3;
+    grid-column: 1/5;
+}
+.gridTextAreaDescription {
+    grid-row: 4/6;
+    grid-column: 1/5;
+}
+.gridLabelPhoto {
+    grid-row: 6/6;
+    grid-column: 1/5;
+}
+.gridFilePhoto {
+    grid-row: 7/7;
+    grid-column: 1/8;
+}
+.gridLabelDateStart {
+    grid-row: 8/8;
+    grid-column: 1/4;
+}
+.gridCalendarStart {
+    grid-row: 9/10;
+    grid-column: 1/4;
+}
+.gridLabelDateEnd {
+    grid-row: 9/9;
+    grid-column: 4/7;
+}
+.gridCalendarEnd {
+    grid-row: 9/10;
+    grid-column: 4/7;
+}
+.gridLabelTags {
+    grid-row: 14/14;
+    grid-column: 1/5;
+}
+
+.gridTextBoxTags {
+    grid-row: 15/15;
+    grid-column: 1/5;
+}
+
+.gridButtonCreateEvent {
+    grid-row: 16/16;
+    grid-column: 1/5;
+}
+
+.vertical-line {
+    grid-row: 1/15;
+    grid-column: 7/7;
+    width: 1px; /* Line width */
+    background-color: darkgray; /* Line color */
+    height: 110%; /* Override in-line if you want specific height. */
+    /*float: left;*/ /* Causes the line to float to left of content. 
+        You can instead use position:absolute or display:inline-block
+        if this fits better with your design */
+}
