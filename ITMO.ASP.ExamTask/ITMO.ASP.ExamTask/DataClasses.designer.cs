@@ -36,7 +36,16 @@ namespace ITMO.ADO.ExamTask
     partial void InsertUsers(Users instance);
     partial void UpdateUsers(Users instance);
     partial void DeleteUsers(Users instance);
+    partial void InsertRequestsForEvents(RequestsForEvents instance);
+    partial void UpdateRequestsForEvents(RequestsForEvents instance);
+    partial void DeleteRequestsForEvents(RequestsForEvents instance);
     #endregion
+		
+		public DataClassesDataContext() : 
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["CheaperTogetherConnectionString"].ConnectionString, mappingSource)
+		{
+			OnCreated();
+		}
 		
 		public DataClassesDataContext(string connection) : 
 				base(connection, mappingSource)
@@ -77,6 +86,14 @@ namespace ITMO.ADO.ExamTask
 				return this.GetTable<Users>();
 			}
 		}
+		
+		public System.Data.Linq.Table<RequestsForEvents> RequestsForEvents
+		{
+			get
+			{
+				return this.GetTable<RequestsForEvents>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Events")]
@@ -103,7 +120,11 @@ namespace ITMO.ADO.ExamTask
 		
 		private string _LastNameUser;
 		
+		private string _Status;
+		
 		private EntitySet<Users> _Users;
+		
+		private EntitySet<RequestsForEvents> _RequestsForEvents;
 		
     #region Определения метода расширяемости
     partial void OnLoaded();
@@ -127,11 +148,14 @@ namespace ITMO.ADO.ExamTask
     partial void OnFirstNameUserChanged();
     partial void OnLastNameUserChanging(string value);
     partial void OnLastNameUserChanged();
+    partial void OnStatusChanging(string value);
+    partial void OnStatusChanged();
     #endregion
 		
 		public Events()
 		{
 			this._Users = new EntitySet<Users>(new Action<Users>(this.attach_Users), new Action<Users>(this.detach_Users));
+			this._RequestsForEvents = new EntitySet<RequestsForEvents>(new Action<RequestsForEvents>(this.attach_RequestsForEvents), new Action<RequestsForEvents>(this.detach_RequestsForEvents));
 			OnCreated();
 		}
 		
@@ -169,7 +193,7 @@ namespace ITMO.ADO.ExamTask
 					this.OnPeopleQuantityChanging(value);
 					this.SendPropertyChanging();
 					this._PeopleQuantity = value;
-					this.SendPropertyChanged("PeopleQuantityProp");
+					this.SendPropertyChanged("PeopleQuantity");
 					this.OnPeopleQuantityChanged();
 				}
 			}
@@ -189,7 +213,7 @@ namespace ITMO.ADO.ExamTask
 					this.OnDescriptionChanging(value);
 					this.SendPropertyChanging();
 					this._Description = value;
-					this.SendPropertyChanged("DescriptionProp");
+					this.SendPropertyChanged("Description");
 					this.OnDescriptionChanged();
 				}
 			}
@@ -215,7 +239,7 @@ namespace ITMO.ADO.ExamTask
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EventDateStart", DbType="Date")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EventDateStart", DbType="DateTime")]
 		public System.Nullable<System.DateTime> EventDateStart
 		{
 			get
@@ -235,7 +259,7 @@ namespace ITMO.ADO.ExamTask
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EventDateEnd", DbType="Date")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EventDateEnd", DbType="DateTime")]
 		public System.Nullable<System.DateTime> EventDateEnd
 		{
 			get
@@ -269,7 +293,7 @@ namespace ITMO.ADO.ExamTask
 					this.OnTagsChanging(value);
 					this.SendPropertyChanging();
 					this._Tags = value;
-					this.SendPropertyChanged("TagsProp");
+					this.SendPropertyChanged("Tags");
 					this.OnTagsChanged();
 				}
 			}
@@ -315,6 +339,26 @@ namespace ITMO.ADO.ExamTask
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="NChar(50)")]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Events_Users", Storage="_Users", ThisKey="EnventId", OtherKey="EventID")]
 		public EntitySet<Users> Users
 		{
@@ -325,6 +369,19 @@ namespace ITMO.ADO.ExamTask
 			set
 			{
 				this._Users.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Events_RequestsForEvents", Storage="_RequestsForEvents", ThisKey="EnventId", OtherKey="RequestEventId")]
+		public EntitySet<RequestsForEvents> RequestsForEvents
+		{
+			get
+			{
+				return this._RequestsForEvents;
+			}
+			set
+			{
+				this._RequestsForEvents.Assign(value);
 			}
 		}
 		
@@ -355,6 +412,18 @@ namespace ITMO.ADO.ExamTask
 		}
 		
 		private void detach_Users(Users entity)
+		{
+			this.SendPropertyChanging();
+			entity.Events = null;
+		}
+		
+		private void attach_RequestsForEvents(RequestsForEvents entity)
+		{
+			this.SendPropertyChanging();
+			entity.Events = this;
+		}
+		
+		private void detach_RequestsForEvents(RequestsForEvents entity)
 		{
 			this.SendPropertyChanging();
 			entity.Events = null;
@@ -533,6 +602,157 @@ namespace ITMO.ADO.ExamTask
 					else
 					{
 						this._EventID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Events");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.RequestsForEvents")]
+	public partial class RequestsForEvents : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _RequestEventId;
+		
+		private string _MemberName;
+		
+		private EntityRef<Events> _Events;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnRequestEventIdChanging(int value);
+    partial void OnRequestEventIdChanged();
+    partial void OnMemberNameChanging(string value);
+    partial void OnMemberNameChanged();
+    #endregion
+		
+		public RequestsForEvents()
+		{
+			this._Events = default(EntityRef<Events>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequestEventId", DbType="Int NOT NULL")]
+		public int RequestEventId
+		{
+			get
+			{
+				return this._RequestEventId;
+			}
+			set
+			{
+				if ((this._RequestEventId != value))
+				{
+					if (this._Events.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRequestEventIdChanging(value);
+					this.SendPropertyChanging();
+					this._RequestEventId = value;
+					this.SendPropertyChanged("RequestEventId");
+					this.OnRequestEventIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MemberName", DbType="NChar(50) NOT NULL", CanBeNull=false)]
+		public string MemberName
+		{
+			get
+			{
+				return this._MemberName;
+			}
+			set
+			{
+				if ((this._MemberName != value))
+				{
+					this.OnMemberNameChanging(value);
+					this.SendPropertyChanging();
+					this._MemberName = value;
+					this.SendPropertyChanged("MemberName");
+					this.OnMemberNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Events_RequestsForEvents", Storage="_Events", ThisKey="RequestEventId", OtherKey="EnventId", IsForeignKey=true)]
+		public Events Events
+		{
+			get
+			{
+				return this._Events.Entity;
+			}
+			set
+			{
+				Events previousValue = this._Events.Entity;
+				if (((previousValue != value) 
+							|| (this._Events.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Events.Entity = null;
+						previousValue.RequestsForEvents.Remove(this);
+					}
+					this._Events.Entity = value;
+					if ((value != null))
+					{
+						value.RequestsForEvents.Add(this);
+						this._RequestEventId = value.EnventId;
+					}
+					else
+					{
+						this._RequestEventId = default(int);
 					}
 					this.SendPropertyChanged("Events");
 				}

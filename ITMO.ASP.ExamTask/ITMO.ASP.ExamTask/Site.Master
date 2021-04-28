@@ -51,6 +51,7 @@
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="InvitorPage.aspx">Страница организатора</a></li>
                         <li><a runat="server" href="MemberPage.aspx">Страница участника</a></li>
+                        <li><a runat="server" href="About.md">Справка</a></li>
                     </ul>
                 </div>
             </div>
@@ -58,6 +59,13 @@
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             <hr />
             <footer>
                 <p>&copy; <%: DateTime.Now.Year %> - "Вместе дешевле"</p>

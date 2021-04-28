@@ -87,6 +87,15 @@ namespace ITMO.ADO.ExamTask
         protected global::System.Web.UI.WebControls.Calendar CalendarStart;
 
         /// <summary>
+        /// LabelEventStatus элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelEventStatus;
+
+        /// <summary>
         /// LabelTags элемент управления.
         /// </summary>
         /// <remarks>
@@ -123,6 +132,33 @@ namespace ITMO.ADO.ExamTask
         protected global::System.Web.UI.WebControls.Calendar CalendarEnd;
 
         /// <summary>
+        /// RequestsLabel элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label RequestsLabel;
+
+        /// <summary>
+        /// GridViewRequest элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewRequest;
+
+        /// <summary>
+        /// SqlDataSource1 элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+
+        /// <summary>
         /// ButtonCreateEvent элемент управления.
         /// </summary>
         /// <remarks>
@@ -130,6 +166,78 @@ namespace ITMO.ADO.ExamTask
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonCreateEvent;
+
+        /// <summary>
+        /// LabelTimeStart элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelTimeStart;
+
+        /// <summary>
+        /// txtTimeStart элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTimeStart;
+
+        /// <summary>
+        /// RequiredFieldValidatorTimeStart элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorTimeStart;
+
+        /// <summary>
+        /// TimeStartValidator элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator TimeStartValidator;
+
+        /// <summary>
+        /// LabelTimeEnd элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelTimeEnd;
+
+        /// <summary>
+        /// txtTimeEnd элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTimeEnd;
+
+        /// <summary>
+        /// RequiredFieldValidatorTimeEnd элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorTimeEnd;
+
+        /// <summary>
+        /// TimeEndValidator элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator TimeEndValidator;
 
         /// <summary>
         /// GridViewEvents элемент управления.

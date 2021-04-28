@@ -72,7 +72,7 @@ textarea {
     grid-column: 1/4;
 }
 .gridLabelDateEnd {
-    grid-row: 9/9;
+    grid-row: 8/8;
     grid-column: 4/7;
 }
 .gridCalendarEnd {
@@ -80,17 +80,17 @@ textarea {
     grid-column: 4/7;
 }
 .gridLabelTags {
-    grid-row: 14/14;
-    grid-column: 1/5;
-}
-
-.gridTextBoxTags {
     grid-row: 15/15;
     grid-column: 1/5;
 }
 
-.gridButtonCreateEvent {
+.gridTextBoxTags {
     grid-row: 16/16;
+    grid-column: 1/5;
+}
+
+.gridButtonCreateEvent {
+    grid-row: 18/18;
     grid-column: 1/5;
 }
 
@@ -99,7 +99,7 @@ textarea {
     grid-column: 7/7;
     width: 1px; /* Line width */
     background-color: darkgray; /* Line color */
-    height: 110%; /* Override in-line if you want specific height. */
+    height: 135%; /* Override in-line if you want specific height. */
     /*float: left;*/ /* Causes the line to float to left of content. 
         You can instead use position:absolute or display:inline-block
         if this fits better with your design */
